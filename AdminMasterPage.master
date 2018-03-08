@@ -1,0 +1,207 @@
+﻿<%@ Master Language="VB" CodeFile="AdminMasterPage.master.vb" Inherits="AdminMasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+    <head runat="server">
+
+    <title>ระบบจองห้องออนไลน์</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+       
+        <link href="Styles/Main.css" rel="stylesheet" type="text/css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    
+    <style>
+        /* Center the image and position the close button */
+.container {
+    padding: 16px;
+}
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+
+    /* The Modal (background) */
+.modal {
+    color: white;
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+/* Extra styles for the cancel button */
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.button2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+}
+.button2:hover {
+    background-color: #008CBA;
+    color: white;
+}
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
+table, td, th {    
+    border: 0px solid #ddd;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+}
+    </style>
+<asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+       <form id="form1" runat="server">
+        <div>
+            <asp:Image ID="Image2" runat="server" ImageUrl="~/Pic/krirk13_p1.jpg" Width="100%"/>
+        </div>
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">มหาวิทยาลัยเกริก</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">หน้าแรก</a></li>
+        <li class="dropdown">
+          <a href="#">ตรวจสถานะห้อง</a></li>
+       
+        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">เลือกห้อง <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="rooms.aspx?Type=S">ห้องเรียน</a></li>
+                <li><a href="rooms.aspx?Type=C">ห้องประชุม/สัมมนาและห้องฝึกอบรมคอมพิวเตอร์</a></li>
+                <li><a href="rooms.aspx?Type=A">ดูทุกห้อง</a></li>
+            </ul>
+        </li>
+        <li><a href="#">ยกเลิกการจอง</a></li>
+        <li><a href="#">ช่องทางการชำระเงิน</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+
+
+
+<label onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><a href="#">สำหรับเจ้าหน้าที่</a></label>
+
+<div id="id01" class="modal">
+ 
+    <div class="container">
+      <label><b>ชื่อผู้ใช้</b></label><br>
+        <asp:TextBox ID="UserIdTextBox" runat="server"></asp:TextBox><br>
+      <label><b>รหัสผ่าน</b></label><br>
+        <asp:TextBox ID="UserPasswordTextBox" runat="server"></asp:TextBox><br>
+
+        <asp:Button ID="Button1" runat="server" class="btn btn-success" Text="เข้าสู่ระบบ" /><br>
+
+      <input type="checkbox" checked="checked"> จดจำรหัสผ่าน
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">ยกเลิก</button>
+      <span class="psw"><a href="#">ลืมรหัสผ่าน?</a></span>
+    </div>
+ 
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+  
+    <div class="Content">
+        <asp:ContentPlaceHolder id="ContentPlaceHolderBody" runat="server"></asp:ContentPlaceHolder>
+    </div>
+
+    <footer class="footer"><p>ข้อมูลติดต่อ</p></footer>
+
+    </form>
+</body>
+</html>
